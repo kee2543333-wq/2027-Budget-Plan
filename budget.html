@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-4b30096e-8f16-45a8-a93b-443f9d8d487d/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <script src="_ds/nocturne-4b30096e-8f16-45a8-a93b-443f9d8d487d/_ds_bundle.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:'Sarabun',var(--font-body),system-ui,sans-serif}
+    a{color:var(--color-accent-300);text-decoration:none}
+    a:hover{color:var(--color-accent)}
+    .num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+    ::selection{background:color-mix(in oklab,var(--color-accent) 35%,transparent)}
+  </style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;border-bottom:1px solid var(--color-neutral-800);background:var(--color-bg);position:sticky;top:0;z-index:30">
+    <div style="display:flex;align-items:center;gap:14px;cursor:pointer" onClick="{{ goHome }}">
+      <div style="width:34px;height:34px;border-radius:9px;border:1px solid var(--color-accent-700);display:grid;place-items:center;background:color-mix(in oklab,var(--color-accent) 12%,transparent)">
+        <i class="ph ph-chart-pie-slice" style="font-size:19px;color:var(--color-accent-300)"></i>
+      </div>
+      <div style="display:flex;flex-direction:column;line-height:1.15">
+        <span style="font-size:15px;font-weight:600;letter-spacing:.2px">งบประมาณรายจ่ายประจำปี</span>
+        <span style="font-size:12px;color:var(--color-neutral-400)">ปีงบประมาณ พ.ศ. 2570</span>
+      </div>
+    </div>
+    <nav style="display:flex;gap:8px;align-items:center">
+      <button class="btn btn-ghost" style="font-family:inherit" onClick="{{ goExpense }}">จำแนกตามงบรายจ่าย</button>
+      <button class="btn btn-ghost" style="font-family:inherit" onClick="{{ goMinistry }}">จำแนกตามกระทรวง</button>
+    </nav>
+  </header>
+
+  <main style="flex:1;padding:36px clamp(20px,4vw,64px) 64px;width:100%;margin:0 auto;box-sizing:border-box">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <section style="padding:24px 0 8px">
+        <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--color-accent-300);margin-bottom:14px">Thailand Budget 2570</div>
+        <h1 style="font-family:inherit;font-size:44px;font-weight:600;margin:0 0 10px;line-height:1.08;max-width:16ch;text-wrap:balance">งบประมาณรายจ่าย<br>ประจำปี พ.ศ. 2570</h1>
+        <p style="font-size:17px;color:var(--color-neutral-300);margin:0 0 4px">วงเงินงบประมาณรวม <b style="color:var(--color-text)">3,788,000</b> ล้านบาท</p>
+        <p style="font-size:14px;color:var(--color-neutral-400);margin:0 0 34px">เพิ่มขึ้นจากปี 2569 จำนวน 7,400 ล้านบาท (+0.2%) · หน่วย : ล้านบาท</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:760px">
+          <button class="card elev-sm" style="text-align:left;font-family:inherit;color:inherit;cursor:pointer;border:1px solid var(--color-neutral-800);padding:24px" style-hover="border-color:var(--color-accent-600);transform:translateY(-2px)" onClick="{{ goExpense }}">
+            <div style="width:40px;height:40px;border-radius:10px;background:color-mix(in oklab,var(--color-accent) 14%,transparent);display:grid;place-items:center;margin-bottom:16px">
+              <i class="ph ph-chart-donut" style="font-size:22px;color:var(--color-accent-300)"></i>
+            </div>
+            <div class="card-title" style="font-family:inherit;font-size:20px;font-weight:600;margin-bottom:6px">จำแนกตามงบรายจ่าย</div>
+            <div class="card-body" style="font-size:14px;color:var(--color-neutral-400)">5 ประเภทงบรายจ่าย เปรียบเทียบปี 2569–2570 พร้อมสัดส่วนวงเงิน</div>
+            <div style="margin-top:18px;color:var(--color-accent-300);font-size:14px;font-weight:500">เปิดดู <i class="ph ph-arrow-right"></i></div>
+          </button>
+          <button class="card elev-sm" style="text-align:left;font-family:inherit;color:inherit;cursor:pointer;border:1px solid var(--color-neutral-800);padding:24px" style-hover="border-color:var(--color-accent-600);transform:translateY(-2px)" onClick="{{ goMinistry }}">
+            <div style="width:40px;height:40px;border-radius:10px;background:color-mix(in oklab,var(--color-accent) 14%,transparent);display:grid;place-items:center;margin-bottom:16px">
+              <i class="ph ph-buildings" style="font-size:22px;color:var(--color-accent-300)"></i>
+            </div>
+            <div class="card-title" style="font-family:inherit;font-size:20px;font-weight:600;margin-bottom:6px">จำแนกตามกระทรวง</div>
+            <div class="card-body" style="font-size:14px;color:var(--color-neutral-400)">33 หน่วยงาน แยกตามประเภทงบรายจ่าย พร้อมยอดรวมรายหน่วยงาน</div>
+            <div style="margin-top:18px;color:var(--color-accent-300);font-size:14px;font-weight:500">เปิดดู <i class="ph ph-arrow-right"></i></div>
+          </button>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isExpense }}" hint-placeholder-val="{{ true }}">
+      <section>
+        <button class="btn btn-ghost" style="font-family:inherit;margin-bottom:18px;padding-left:0" onClick="{{ goHome }}"><i class="ph ph-arrow-left"></i>&nbsp;หน้าหลัก</button>
+        <h2 style="font-family:inherit;font-size:30px;font-weight:600;margin:0 0 4px">การจัดสรรงบประมาณตามงบรายจ่าย</h2>
+        <p style="font-size:14px;color:var(--color-neutral-400);margin:0 0 24px">ปีงบประมาณ 2569 – 2570 · หน่วย : ล้านบาท</p>
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:32px;align-items:start">
+          <div>
+            <table class="table" style="width:100%">
+              <thead>
+                <tr>
+                  <th style="text-align:left">งบรายจ่าย</th>
+                  <th class="num" style="text-align:right">ปี 2569</th>
+                  <th class="num" style="text-align:right">ปี 2570</th>
+                  <th class="num" style="text-align:right">เพิ่ม/ลด</th>
+                  <th class="num" style="text-align:right">%</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ expenseRows }}" as="r" hint-placeholder-count="5">
+                  <tr style="background: {{ r.rowBg }}">
+                    <td>
+                      <div style="display:flex;align-items:center;gap:9px">
+                        <span style="width:10px;height:10px;border-radius:3px;flex:none;background: {{ r.color }}"></span>
+                        <span style="font-weight:500">{{ r.name }}</span>
+                      </div>
+                      <div style="font-size:12px;color:var(--color-neutral-500);margin-left:19px">สัดส่วน {{ r.share2569 }}% → {{ r.share2570 }}%</div>
+                    </td>
+                    <td class="num" style="color:var(--color-neutral-300)">{{ r.v2569 }}</td>
+                    <td class="num" style="font-weight:600">{{ r.v2570 }}</td>
+                    <td class="num" style="color: {{ r.diffColor }}">{{ r.diff }}</td>
+                    <td class="num" style="color: {{ r.diffColor }}">{{ r.diffPct }}</td>
+                  </tr>
+                </sc-for>
+              </tbody>
+              <tfoot>
+                <tr style="border-top:2px solid var(--color-neutral-700)">
+                  <td style="font-weight:700">รวม</td>
+                  <td class="num" style="font-weight:600;color:var(--color-neutral-300)">3,780,600.0</td>
+                  <td class="num" style="font-weight:700">3,788,000.0</td>
+                  <td class="num" style="color:var(--color-accent-300)">+7,400.0</td>
+                  <td class="num" style="color:var(--color-accent-300)">+0.2</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <div class="card" style="margin-top:22px;padding:20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;border:1px solid var(--color-accent-700);background:color-mix(in oklab,var(--color-accent) 8%,transparent)">
+              <div style="width:40px;height:40px;border-radius:10px;background:color-mix(in oklab,var(--color-accent) 16%,transparent);display:grid;place-items:center;flex:none">
+                <i class="ph ph-buildings" style="font-size:22px;color:var(--color-accent-300)"></i>
+              </div>
+              <div style="flex:1;min-width:200px">
+                <div style="font-weight:600;font-size:15px">งบลงทุน 496,062.5 ล้านบาท</div>
+                <div style="font-size:13px;color:var(--color-neutral-400)">ดูรายละเอียดโครงการก่อสร้างวงเงิน ≥ 500 ล้านบาท ทุกกระทรวง</div>
+              </div>
+              <a class="btn btn-primary" style="font-family:inherit;text-decoration:none" href="index.html">สรุปโครงการก่อสร้าง ≥ 500 ลบ. <i class="ph ph-arrow-up-right"></i></a>
+            </div>
+          </div>
+
+          <div class="card elev-sm" style="padding:24px 20px;text-align:center">
+            <div style="font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--color-neutral-400);margin-bottom:12px">สัดส่วนงบประมาณ ปี 2570</div>
+            {{ donut }}
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:20px;text-align:left">
+              <sc-for list="{{ expenseRows }}" as="r" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+                  <span style="width:11px;height:11px;border-radius:3px;flex:none;background: {{ r.color }}"></span>
+                  <span style="flex:1">{{ r.name }}</span>
+                  <span class="num" style="font-weight:600">{{ r.share2570 }}%</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isMinistry }}" hint-placeholder-val="{{ true }}">
+      <section>
+        <button class="btn btn-ghost" style="font-family:inherit;margin-bottom:18px;padding-left:0" onClick="{{ goHome }}"><i class="ph ph-arrow-left"></i>&nbsp;หน้าหลัก</button>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px">
+          <div>
+            <h2 style="font-family:inherit;font-size:30px;font-weight:600;margin:0 0 4px">งบประมาณจำแนกตามกระทรวงและงบรายจ่าย</h2>
+            <p style="font-size:14px;color:var(--color-neutral-400);margin:0">ปีงบประมาณ พ.ศ. 2570 · 33 หน่วยงาน · หน่วย : ล้านบาท</p>
+          </div>
+          <button class="btn btn-secondary" style="font-family:inherit" onClick="{{ toggleSort }}">
+            <i class="ph ph-sort-descending"></i>&nbsp;{{ sortLabel }}
+          </button>
+        </div>
+        <p style="font-size:13px;color:var(--color-neutral-500);margin:0 0 18px">แตะที่ตัวเลข <span style="color:var(--color-accent-300)">งบลงทุน</span> ของแต่ละหน่วยงาน เพื่อดูว่าแบ่งเป็นโครงการก่อสร้างใดบ้าง</p>
+        <div style="overflow:auto;max-height:calc(100vh - 220px);border:1px solid var(--color-neutral-800);border-radius:var(--radius-md)">
+          <table class="table" style="width:100%;min-width:820px;margin:0">
+            <thead>
+              <tr>
+                <th style="text-align:left;position:sticky;left:0;top:0;z-index:3;background:var(--color-neutral-800)">กระทรวง / หน่วยงาน</th>
+                <th class="num" style="position:sticky;top:0;z-index:2;background:var(--color-neutral-800);text-align:right">งบบุคลากร</th>
+                <th class="num" style="position:sticky;top:0;z-index:2;background:var(--color-neutral-800);text-align:right">งบดำเนินงาน</th>
+                <th class="num" style="position:sticky;top:0;z-index:2;background:var(--color-neutral-800);color:var(--color-accent-300);text-align:right">งบลงทุน</th>
+                <th class="num" style="position:sticky;top:0;z-index:2;background:var(--color-neutral-800);text-align:right">งบเงินอุดหนุน</th>
+                <th class="num" style="position:sticky;top:0;z-index:2;background:var(--color-neutral-800);text-align:right">งบรายจ่ายอื่น</th>
+                <th class="num" style="position:sticky;top:0;z-index:2;background:var(--color-neutral-800);text-align:right">รวม</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ ministryRows }}" as="m" hint-placeholder-count="12">
+                <tr>
+                  <td style="min-width:260px"><span style="color:var(--color-neutral-500);margin-right:6px">{{ m.no }}</span>{{ m.name }}</td>
+                  <td class="num">{{ m.personnel }}</td>
+                  <td class="num">{{ m.operation }}</td>
+                  <td class="num" style="padding:0">
+                    <a href="index.html" style="display:block;padding:9px 12px;font-weight:600;background: {{ m.investBg }}" title="ดูโครงการก่อสร้าง">{{ m.investment }}</a>
+                  </td>
+                  <td class="num">{{ m.subsidy }}</td>
+                  <td class="num">{{ m.other }}</td>
+                  <td class="num" style="font-weight:600">{{ m.total }}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+            <tfoot>
+              <tr style="border-top:2px solid var(--color-neutral-700)">
+                <td style="font-weight:700;position:sticky;left:0;background:var(--color-neutral-900)">รวมทั้งสิ้น</td>
+                <td class="num" style="font-weight:600">670,877.8</td>
+                <td class="num" style="font-weight:600">257,227.2</td>
+                <td class="num" style="font-weight:700;color:var(--color-accent-300)">496,062.5</td>
+                <td class="num" style="font-weight:600">1,328,585.2</td>
+                <td class="num" style="font-weight:600">1,035,247.3</td>
+                <td class="num" style="font-weight:700">3,788,000.0</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    </sc-if>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const COLORS = ['#d9b36e','#a884d9','#5fb8b0','#5a7fc0','#d9615f'];
+
+const EXPENSE = [
+  { name:'งบบุคลากร',     v2569:646170.9, s2569:17.1, v2570:670877.8, s2570:17.7, diff:24706.9,  dpct:3.8 },
+  { name:'งบดำเนินงาน',   v2569:257055.6, s2569:6.8,  v2570:257227.2, s2570:6.8,  diff:171.6,    dpct:0.1 },
+  { name:'งบลงทุน',       v2569:570769.6, s2569:15.1, v2570:496062.5, s2570:13.1, diff:-74707.1, dpct:-13.1 },
+  { name:'งบเงินอุดหนุน', v2569:1258362.7,s2569:33.3, v2570:1328585.2,s2570:35.1, diff:70222.5,  dpct:5.6 },
+  { name:'งบรายจ่ายอื่น', v2569:1048241.2,s2569:27.7, v2570:1035247.3,s2570:27.3, diff:-12993.9, dpct:-1.2 },
+];
+
+const MINISTRY = [
+  ['งบกลาง',13000.0,109870.0,62960.0,460750.0,47300.0,693880.0],
+  ['สำนักนายกรัฐมนตรี',4525.8,3558.7,7561.0,7820.3,9369.5,32835.3],
+  ['กระทรวงกลาโหม',97940.5,23742.5,8737.4,4762.2,68102.1,203284.7],
+  ['กระทรวงการคลัง',13669.7,8952.9,2813.1,3755.3,411680.1,440871.1],
+  ['กระทรวงการต่างประเทศ',3037.6,2740.0,408.6,978.1,1092.5,8256.8],
+  ['กระทรวงการท่องเที่ยวและกีฬา',1736.3,857.5,1149.9,579.8,1532.7,5856.2],
+  ['กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์',3034.8,2092.9,730.4,19629.6,87.8,25575.5],
+  ['กระทรวงการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรม',8266.4,1568.8,8759.6,114114.1,1233.7,133942.6],
+  ['กระทรวงเกษตรและสหกรณ์',24409.3,9870.1,82535.0,1541.2,2247.0,120603.2],
+  ['กระทรวงคมนาคม',9604.0,2575.3,163088.9,101.7,1143.6,176513.5],
+  ['กระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม',1412.5,6818.8,2600.6,2556.6,237.2,13625.7],
+  ['กระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อม',10808.7,5509.0,12009.6,896.8,6924.3,36148.4],
+  ['กระทรวงพลังงาน',939.1,571.5,527.7,148.7,106.3,2293.3],
+  ['กระทรวงพาณิชย์',2424.7,1717.6,497.6,566.3,2065.2,7271.4],
+  ['กระทรวงมหาดไทย',20594.4,14141.7,41916.2,174065.9,37561.8,288280.0],
+  ['กระทรวงยุติธรรม',11949.5,9318.7,4881.5,803.8,1901.1,28854.6],
+  ['กระทรวงแรงงาน',3864.6,1216.4,664.0,66082.3,921.5,72748.8],
+  ['กระทรวงวัฒนธรรม',2511.2,1247.5,1703.4,1732.2,1269.0,8463.3],
+  ['กระทรวงศึกษาธิการ',229950.9,13371.1,11561.8,94064.5,10628.6,359576.9],
+  ['กระทรวงสาธารณสุข',114821.8,14527.7,17357.8,34490.3,280.5,181478.1],
+  ['กระทรวงอุตสาหกรรม',1590.0,531.0,1303.1,69.3,1026.9,4520.3],
+  ['ส่วนราชการไม่สังกัดสำนักนายกรัฐมนตรี กระทรวง หรือทบวง',90786.0,19294.1,15741.1,7037.1,2790.6,135648.9],
+  ['จังหวัดและกลุ่มจังหวัด',null,3132.8,367.6,null,783.9,4284.3],
+  ['รัฐวิสาหกิจ',null,null,46186.6,15461.5,73506.2,135154.3],
+  ['หน่วยงานของรัฐสภา',null,null,null,7848.8,null,7848.8],
+  ['หน่วยงานของศาล',null,null,null,28482.0,null,28482.0],
+  ['หน่วยงานขององค์กรอิสระและองค์กรอัยการ',null,null,null,25866.0,null,25866.0],
+  ['องค์กรปกครองส่วนท้องถิ่น',null,null,null,219727.4,null,219727.4],
+  ['หน่วยงานอื่นของรัฐ',null,null,null,585.9,null,585.9],
+  ['สภากาชาดไทย',null,null,null,9723.3,null,9723.3],
+  ['ส่วนราชการในพระองค์',null,null,null,9904.1,null,9904.1],
+  ['ทุนหมุนเวียน',null,null,null,14440.1,280417.1,294857.2],
+  ['รายจ่ายเพื่อชดใช้เงินคงคลัง',null,null,null,null,71038.1,71038.1],
+];
+
+const MAX_INVEST = 163088.9;
+
+class Component extends DCLogic {
+  state = { view: 'home', sortInvest: false };
+
+  go(v) { this.setState({ view: v }); if (typeof window!=='undefined') window.scrollTo(0,0); }
+
+  fmt(n) { return n==null ? '–' : n.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+  donutEl() {
+    const R=76, C=2*Math.PI*R, sw=26;
+    let acc=0;
+    const segs = EXPENSE.map((e,i)=>{
+      const frac=e.s2570/100, len=C*frac, off=-acc*C;
+      acc+=frac;
+      return React.createElement('circle',{key:i,cx:100,cy:100,r:R,fill:'none',
+        stroke:COLORS[i],strokeWidth:sw,strokeDasharray:`${len} ${C-len}`,
+        strokeDashoffset:off,transform:'rotate(-90 100 100)'});
+    });
+    return React.createElement('svg',{viewBox:'0 0 200 200',style:{width:'190px',height:'190px',margin:'0 auto',display:'block'}},
+      ...segs,
+      React.createElement('text',{x:100,y:94,textAnchor:'middle',fontSize:'21',fontWeight:'700',fill:'var(--color-text)',fontFamily:'inherit'},'3,788,000'),
+      React.createElement('text',{x:100,y:116,textAnchor:'middle',fontSize:'13',fill:'var(--color-neutral-400)',fontFamily:'inherit'},'ล้านบาท')
+    );
+  }
+
+  renderVals() {
+    const expenseRows = EXPENSE.map((e,i)=>({
+      name:e.name, color:COLORS[i],
+      rowBg: i===2 ? 'color-mix(in oklab,var(--color-accent) 7%,transparent)' : 'transparent',
+      v2569:this.fmt(e.v2569), v2570:this.fmt(e.v2570),
+      share2569:e.s2569, share2570:e.s2570,
+      diff:(e.diff>=0?'+':'')+this.fmt(e.diff),
+      diffPct:(e.dpct>=0?'+':'')+e.dpct,
+      diffColor:e.diff>=0?'var(--color-accent-300)':'#d9615f',
+    }));
+
+    let rows = MINISTRY.map((m,i)=>({ raw:m, no:i+1 }));
+    if (this.state.sortInvest) rows = rows.slice().sort((a,b)=>(b.raw[3]||0)-(a.raw[3]||0));
+    const ministryRows = rows.map(({raw,no})=>{
+      const inv=raw[3];
+      const pct=inv?Math.round(inv/MAX_INVEST*100):0;
+      return {
+        no, name:raw[0],
+        personnel:this.fmt(raw[1]), operation:this.fmt(raw[2]),
+        investment:this.fmt(inv), subsidy:this.fmt(raw[4]),
+        other:this.fmt(raw[5]), total:this.fmt(raw[6]),
+        investBg: inv ? `linear-gradient(90deg, color-mix(in oklab,var(--color-accent) 22%,transparent) ${pct}%, transparent ${pct}%)` : 'transparent',
+      };
+    });
+
+    return {
+      isHome:this.state.view==='home',
+      isExpense:this.state.view==='expense',
+      isMinistry:this.state.view==='ministry',
+      goHome:()=>this.go('home'),
+      goExpense:()=>this.go('expense'),
+      goMinistry:()=>this.go('ministry'),
+      toggleSort:()=>this.setState(s=>({sortInvest:!s.sortInvest})),
+      sortLabel:this.state.sortInvest?'เรียงตามลำดับเดิม':'เรียงตามงบลงทุนสูงสุด',
+      expenseRows, ministryRows,
+      donut:this.donutEl(),
+    };
+  }
+}
+</script>
+</body>
+</html>
